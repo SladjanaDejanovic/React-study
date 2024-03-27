@@ -219,3 +219,13 @@ countWrong;
 // nullish coalescing operator ?? (it will return second value when first value is false or undefined, but not when it's 0 or empty string)
 const count = book.reviews.librarything.reviewsCount ?? "no data";
 count;
+
+//// Optional chaining
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  // chain only continues if properties before ? aren't undefined, adn then we are setting default value in case it is undefined, so we won't get an error:
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book));
+// good practice to use when we are not sure stracture of the data we are reciving
