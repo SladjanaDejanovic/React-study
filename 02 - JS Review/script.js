@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 //// Destructuring
-const book = getBook(1);
+const book = getBook(2);
 book;
 
 // const title = book.title;
@@ -186,3 +186,36 @@ summary;
 const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
 pagesRange;
 console.log(`The book has ${pagesRange} pages`);
+
+//// Arrow functions
+// function declaration
+// function getYear(str) {
+//   return str.split("-")[0];
+// }
+
+const getYear = (str) => str.split("-")[0]; // function expression
+// when making arrow function with multiple line of code, use code block, and at the end return
+
+console.log(getYear(publicationDate));
+
+//// Short-circuiting and logical operator: &&, ||, ??
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// falsy: 0, "", undefined, null
+console.log("slady" && "Some string");
+console.log(0 && "Some string");
+
+// short circuiting happens when first value is true, so operator doesn't even look at a second value
+console.log(true || "Some string");
+console.log(false || "Some string");
+console.log(book.translations.spanish);
+const spanishTransaltion = book.translations.spanish || "NOT TRANSLATED";
+spanishTransaltion;
+const countWrong = book.reviews.librarything.reviewsCount || "no data"; // revCount for book with id 2 is 0
+countWrong;
+
+// nullish coalescing operator ?? (it will return second value when first value is false or undefined, but not when it's 0 or empty string)
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+count;
