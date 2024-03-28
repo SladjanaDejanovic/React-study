@@ -1,3 +1,4 @@
+/*
 const data = [
   {
     id: 1,
@@ -144,7 +145,7 @@ function getBook(id) {
 }
 
 //// Destructuring
-/*
+
 const book = getBook(2);
 book;
 
@@ -231,7 +232,7 @@ function getTotalReviewCount(book) {
 console.log(getTotalReviewCount(book));
 // good practice to use when we are not sure stracture of the data we are reciving
 */
-
+/*
 ////  Array methods
 //array functional methods (map, filter, reduce) don't mutate original array, instead tehy return new one
 
@@ -267,5 +268,40 @@ pagesAllBooks;
 const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
 sortedByPages;
 
-// Imumtable arrays
+//// Imumtable arrays
 // imumtable operations are when we're not manipulating data structure
+
+// 1) Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+// 3) Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
+*/
+//// Async JS
+
+// Promises
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// async/await
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+}
+getTodos();
