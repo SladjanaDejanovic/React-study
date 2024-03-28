@@ -144,6 +144,7 @@ function getBook(id) {
 }
 
 //// Destructuring
+/*
 const book = getBook(2);
 book;
 
@@ -229,6 +230,42 @@ function getTotalReviewCount(book) {
 }
 console.log(getTotalReviewCount(book));
 // good practice to use when we are not sure stracture of the data we are reciving
+*/
 
-//// Array map method
-//array functional methods don't mutate original array, instead tehy return new one
+////  Array methods
+//array functional methods (map, filter, reduce) don't mutate original array, instead tehy return new one
+
+// map methods loops over array with operation applied to each element of that array
+const books = getBooks();
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+})); //using ( before {} we are automathicaly returning
+essentialData;
+
+// filter method
+const longBooks = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooks;
+
+const adventureBooks = books
+  .filter((books) => books.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks;
+
+//reduce method
+// to reduce entire array to one value
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+pagesAllBooks;
+
+// sort method
+// is not a functional method, doesn't return new array, instead it mutates original array
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+// Imumtable arrays
+// imumtable operations are when we're not manipulating data structure
