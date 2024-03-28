@@ -229,3 +229,6 @@ function getTotalReviewCount(book) {
 }
 console.log(getTotalReviewCount(book));
 // good practice to use when we are not sure stracture of the data we are reciving
+
+//// Array map method
+//array functional methods don't mutate original array, instead tehy return new one
