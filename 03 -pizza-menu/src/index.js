@@ -68,14 +68,22 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObject={pizza} key={pizza.name} /> //key always has to be unique, so in this case we can use pizza name, bc every name is different
-        ))}
-      </ul>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObject={pizza} key={pizza.name} /> //key always has to be unique, so in this case we can use pizza name, bc every name is different
+          ))}
+        </ul>
+      ) : (
+        <p>We are still working on our menu. Please come back later.</p>
+      )}
 
       {/** 
       <Pizza
@@ -110,8 +118,8 @@ function Pizza(props) {
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 9;
-  const closeHour = 22;
+  const openHour = 12;
+  const closeHour = 23;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
@@ -120,7 +128,16 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We are currently open
+      {isOpen ? (
+        <div className="order">
+          <p>We are open until {closeHour}:00. Come visit us or order online</p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00.{" "}
+        </p>
+      )}
     </footer>
   );
 }
