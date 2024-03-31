@@ -71,6 +71,13 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObject={pizza} key={pizza.name} /> //key always has to be unique, so in this case we can use pizza name, bc every name is different
+        ))}
+      </ul>
+
+      {/** 
       <Pizza
         name="Pizza Prosciutto"
         ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
@@ -83,21 +90,21 @@ function Menu() {
         ingredients="Tomato, mushrooms"
         price={12}
         photoName="pizzas/funghi.jpg"
-      />
+      />*/}
     </main>
   );
 }
 
 function Pizza(props) {
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizzaObject.photoName} alt={props.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
