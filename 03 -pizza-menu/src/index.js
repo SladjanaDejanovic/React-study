@@ -75,12 +75,19 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
+
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza pizzaObject={pizza} key={pizza.name} /> //key always has to be unique, so in this case we can use pizza name, bc every name is different
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 create dishes to choose from. All from
+            our stone over, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza pizzaObject={pizza} key={pizza.name} /> //key always has to be unique, so in this case we can use pizza name, bc every name is different
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We are still working on our menu. Please come back later.</p>
       )}
@@ -105,12 +112,12 @@ function Menu() {
 
 function Pizza({ pizzaObject }) {
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObject.photoName} alt={pizzaObject.name} />
       <div>
         <h3>{pizzaObject.name}</h3>
         <p>{pizzaObject.ingredients}</p>
-        <span>{pizzaObject.price}</span>
+        <span>{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price}</span>
       </div>
     </li>
   );
