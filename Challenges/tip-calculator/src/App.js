@@ -70,7 +70,6 @@ function Percentage({ children, percentage, onSelect }) {
     </div>
   );
 }
-
 function Output({ bill, tip }) {
   return (
     <h3>
@@ -78,7 +77,6 @@ function Output({ bill, tip }) {
     </h3>
   );
 }
-
 function Reset({ onReset }) {
   return <button onClick={onReset}>Reset</button>;
 }
