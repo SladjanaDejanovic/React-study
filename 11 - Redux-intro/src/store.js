@@ -48,7 +48,6 @@ const store = createStore(reducer);
 // console.log(store.getState());
 
 // store.dispatch({ type: "account/payLoan" });
-// console.log(store.getState());
 
 function deposit(amount) {
   return { type: "account/deposit", payload: amount };
