@@ -2,12 +2,17 @@ const initialStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
+  isLoading: false,
 };
 
 export default function accountReducer(state = initialStateAccount, action) {
   switch (action.type) {
     case "account/deposit":
-      return { ...state, balance: state.balance + action.payload };
+      return {
+        ...state,
+        balance: state.balance + action.payload,
+        isLoading: false,
+      };
 
     case "account/withdraw":
       return { ...state, balance: state.balance - action.payload };
@@ -28,14 +33,37 @@ export default function accountReducer(state = initialStateAccount, action) {
         loanPurpose: "",
         balance: state.balance - state.loan,
       };
+    case "convertingCurrency":
+      return { ...state, isLoading: true };
 
     default:
       return state;
   }
 }
 
-export function deposit(amount) {
-  return { type: "account/deposit", payload: amount };
+export function deposit(amount, currency) {
+  if (currency === "USD") return { type: "account/deposit", payload: amount };
+
+  // we will not return the action immediately, but instead return a function. when we dispatch
+  // and then call the deposit action creator,
+  // instead of ending up with the event object,
+  // we will end up with a function.
+  // So basically, we will dispatch a function.
+  // And so when Redux sees that,
+  // it will know that that function is the thunk.
+  // this is async func we want to execute before dispatching anything to the store
+  return async function (dispatch, getState) {
+    dispatch({ type: "account/convertingCurrency" });
+    //API call
+    const res = await fetch(
+      `https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`
+    );
+    const data = await res.json();
+    const converted = data.rates.USD;
+
+    // return action
+    dispatch({ type: "account/deposit", payload: converted });
+  };
 }
 
 export function withdraw(amount) {
