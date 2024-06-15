@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 function App() {
   const fullName = useSelector((state) => state.customer.fullName);
+  const balance = useSelector((state) => state.account.balance);
+
   return (
     <div>
       <h1>🏦 The React-Redux Bank ⚛️</h1>
@@ -15,7 +17,7 @@ function App() {
         <>
           <Customer />
           <AccountOperations />
-          <BalanceDisplay />
+          <BalanceDisplay balance={balance} />
         </>
       )}
     </div>
